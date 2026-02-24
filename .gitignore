@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+venv/
+env/
+.venv/
+
+# Build / cache
+frontend/dist/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.vite/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+# IDE and OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Optional
+*.sqlite
+*.db
+*.zip
