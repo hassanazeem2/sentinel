@@ -1,0 +1,10 @@
+node_modules
+frontend/node_modules
+venv
+.git
+.env
+*.zip
+__pycache__
+*.pyc
+.DS_Store
+frontend/dist
