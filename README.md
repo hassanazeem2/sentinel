@@ -4,6 +4,9 @@ A full-stack **deal risk and pipeline intelligence** dashboard. Analyze B2B deal
 
 > **Note:** This is a **portfolio / demo project**. Use it to learn, fork, or extend. Not intended as production software for critical business decisions without additional hardening.
 
+
+<img width="1512" height="750" alt="sentinel" src="https://github.com/user-attachments/assets/db19bf33-0190-44de-83f0-110ff553a42c" />
+
 ---
 
 ## Features
