@@ -1,8 +1,8 @@
 # Sentinel AI — B2B Deal Risk Intelligence
 
-A full-stack **deal risk and pipeline intelligence** dashboard. Analyze B2B deals for behavioral, psychological, and structural risk; get intervention plans and forecast recommendations. Ready for production deployment.
+A full-stack **deal risk and pipeline intelligence** dashboard. Analyze B2B deals for behavioral, psychological, and structural risk; get intervention plans and forecast recommendations.
 
-**After you push to GitHub** (or deploy anywhere), use the **[Production deployment](#production-deployment)** section below to run it for real users (Docker or build + run, env vars, HTTPS).
+> **Note:** This is a **portfolio / demo project**. Use it to learn, fork, or extend. Not intended as production software for critical business decisions without additional hardening.
 
 ---
 
@@ -25,7 +25,7 @@ A full-stack **deal risk and pipeline intelligence** dashboard. Analyze B2B deal
 |----------|--------|
 | Backend  | Python 3, FastAPI, Pydantic, Uvicorn |
 | Frontend | React, Vite, D3.js |
-| API      | REST (JSON); configurable CORS |
+| API      | REST (JSON); CORS enabled for local dev |
 
 ---
 
@@ -70,58 +70,6 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
-## Production deployment
-
-For release to users, use one of the following.
-
-### Option A: Docker (recommended)
-
-Single image serves API and frontend on one port.
-
-```bash
-docker build -t sentinel-ai .
-docker run -p 8000:8000 -e ENVIRONMENT=production -e CORS_ORIGINS=https://yourdomain.com sentinel-ai
-```
-
-Then open **http://localhost:8000** (or your server URL). No separate frontend server.
-
-### Option B: Build frontend, then run backend
-
-Backend serves the built frontend when `frontend/dist` exists.
-
-```bash
-# Build frontend (API will use same origin)
-cd frontend && npm ci && npm run build && cd ..
-
-# Run backend (set env for production)
-export ENVIRONMENT=production
-export CORS_ORIGINS=https://yourdomain.com   # your public app URL(s)
-python files/main.py
-```
-
-Open **http://localhost:8000**. API and UI are on the same host.
-
-### Environment variables (production)
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `ENVIRONMENT` | `development` | Set to `production` for stricter CORS and doc paths |
-| `HOST` | `0.0.0.0` | Bind address |
-| `PORT` | `8000` | Port |
-| `CORS_ORIGINS` | — | Comma-separated allowed origins, e.g. `https://app.yourdomain.com` |
-| `MAX_DEALS_PER_REQUEST` | `500` | Max deals per `/api/analyze-deals` request |
-
-Copy `.env.example` to `.env` and adjust. Do not commit `.env`.
-
-### Production checklist
-
-- Set `ENVIRONMENT=production`.
-- Set `CORS_ORIGINS` to your public app URL(s).
-- Run behind HTTPS (reverse proxy e.g. nginx, or your host’s TLS).
-- Use a process manager (e.g. systemd, Docker) so the app restarts on failure.
-
----
-
 ## Project structure
 
 ```
@@ -138,8 +86,6 @@ sentinel-ai-deal-risk/
 │   ├── package.json
 │   └── vite.config.js
 ├── requirements.txt
-├── Dockerfile
-├── .env.example
 ├── README.md
 ├── LICENSE
 └── .gitignore
@@ -174,7 +120,7 @@ Optional: `company_profile`, `stakeholders`, `activity`, `sentiment`. See the AP
 | `/api/health` | GET | Health check |
 | `/api/demo-deals` | GET | Pre-built demo deals (analyzed) |
 | `/api/analyze` | POST | Analyze one deal |
-| `/api/analyze-deals` | POST | Analyze a list of deals (max 500 per request) |
+| `/api/analyze-deals` | POST | Analyze a list of deals |
 
 ---
 
